@@ -4,15 +4,15 @@ import ReviewItem from '../Components/ReviewItem/ReviewItem';
 import { getDatabaseCart, processOrder, removeFromDatabaseCart } from '../utilities/databaseManager';
 import fakeData from './../fakeData/index';
 import happyImage from '../images/giphy.gif'
+import { useHistory } from 'react-router-dom';
 const Review = () => {
     const [cart , setCart] = useState([]);
     const [orderPlaced , setOrderedPlaced] = useState(false);
-    const handlePlaceOrder =()=>{
-        setCart([])
-        setOrderedPlaced(true);
-        processOrder()
+    const history = useHistory()
+    const handleProceedCheckout =()=>{
+        history.push('/shipment')
        // console.log('Order Placed SuccesFully')
-    }
+    } 
     const removeProduct = (productKey) =>{
        // console.log('removed Clicked',productKey);
         const newCart = cart.filter(pd => pd.key !== productKey)
@@ -47,8 +47,8 @@ const Review = () => {
             <div className="cart-container">
                 <Cart cart={cart}>
                     <button
-                    onClick={handlePlaceOrder}
-                     className="main-button">Place Order</button>
+                    onClick={handleProceedCheckout}
+                     className="main-button">Proceed Checkout</button>
                 </Cart>
             </div>
         </div>
